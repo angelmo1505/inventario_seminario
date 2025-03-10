@@ -1,0 +1,28 @@
+image: amazoncorretto:17
+
+clone:
+  depth: full
+
+definitions:
+  caches:
+    sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
+  steps:
+    - step: &build-test-sonarcloud
+        name: Build, test and analyze on SonarCloud
+        caches:
+          - gradle
+          - sonar
+        script:
+          - chmod +x gradlew
+          - ./gradlew build sonar
+        artifacts:
+          - build/libs/**
+
+pipelines:
+  branches:
+    develop:
+      - step: *build-test-sonarcloud
+
+  pull-requests:
+    '**':
+      - step: *build-test-sonarcloud
