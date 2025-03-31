@@ -44,13 +44,7 @@ public class OrdenCompraController {
         service.delete(id);
     }
 
-    //  Generar orden de compra automática
-    @PostMapping("/generar-orden")
-    public ResponseEntity<OrdenCompraModel> generarOrdenAutomatica(
-            @RequestParam String producto, @RequestParam int cantidadMinima, @RequestParam int cantidadActual) {
-        return ResponseEntity.ok(service.generarOrdenAutomatica(producto, cantidadMinima, cantidadActual));
-    }
-
+    
     //  Actualizar estado de una orden
     @PutMapping("/actualizar-estado/{id}")
     public ResponseEntity<OrdenCompraModel> actualizarEstadoOrden(
