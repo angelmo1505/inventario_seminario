@@ -30,8 +30,13 @@ public class OrdenCompraController {
     }
 
     @PostMapping
-    public OrdenCompraModel crear(@RequestBody OrdenCompraModel ordenCompra) {
-        return service.create(ordenCompra);
+    public ResponseEntity<?> crear(@RequestBody OrdenCompraModel ordenCompra) {
+        try {
+            OrdenCompraModel nuevaOrden = service.create(ordenCompra);
+            return ResponseEntity.ok(nuevaOrden);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping
