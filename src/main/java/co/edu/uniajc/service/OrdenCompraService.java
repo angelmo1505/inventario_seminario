@@ -37,7 +37,7 @@ public class OrdenCompraService {
         }
         repository.deleteById(id);
     }
-    // 📌 Generar automáticamente órdenes cuando el stock es bajo
+    // Generar automáticamente órdenes cuando el stock es bajo
     public OrdenCompraModel generarOrdenAutomatica(String producto, int cantidadMinima, int cantidadActual) {
         if (cantidadActual <= cantidadMinima) {
             OrdenCompraModel orden = new OrdenCompraModel();
