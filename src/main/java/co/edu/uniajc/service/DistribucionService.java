@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 public class DistribucionService {
     private final DistribucionRepository repository;
-    // hola como
     @Autowired
     public DistribucionService(DistribucionRepository repository) {
         this.repository = repository;

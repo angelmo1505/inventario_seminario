@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class ProveedorService {
     private final ProveedorRepository repository;
-// hola mundo
+
     @Autowired
     public ProveedorService(ProveedorRepository repository) {
         this.repository = repository;

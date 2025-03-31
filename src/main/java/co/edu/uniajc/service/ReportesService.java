@@ -11,9 +11,7 @@ import java.util.Optional;
 @Service
 public class ReportesService {
     private final ReportesRepository repository;
-
     @Autowired
-
     public ReportesService(ReportesRepository repository) {
         this.repository = repository;
     }

@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class OrdenCompraService {
     private final OrdenCompraRepository repository;
-// hola mundo
+
     @Autowired
     public OrdenCompraService(OrdenCompraRepository repository) {
         this.repository = repository;

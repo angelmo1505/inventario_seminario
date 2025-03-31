@@ -28,6 +28,7 @@ public class SalidaMateriaPrimaService {
         if (!repository.existsById(salida.getId())) {
             throw new RuntimeException("Salida no encontrada");
         }
+        //
         return repository.save(salida);
     }
     public void delete(Long id) {
