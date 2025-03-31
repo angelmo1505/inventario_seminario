@@ -1,4 +1,4 @@
-package com.geuni.ajc.model;
+package co.edu.uniajc.model;
 
 public enum EstadoOrdenCompra {
     PENDIENTE,
