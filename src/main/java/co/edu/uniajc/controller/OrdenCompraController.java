@@ -43,4 +43,25 @@ public class OrdenCompraController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    //  Generar orden de compra automática
+    @PostMapping("/generar-orden")
+    public ResponseEntity<OrdenCompraModel> generarOrdenAutomatica(
+            @RequestParam String producto, @RequestParam int cantidadMinima, @RequestParam int cantidadActual) {
+        return ResponseEntity.ok(service.generarOrdenAutomatica(producto, cantidadMinima, cantidadActual));
+    }
+
+    //  Actualizar estado de una orden
+    @PutMapping("/actualizar-estado/{id}")
+    public ResponseEntity<OrdenCompraModel> actualizarEstadoOrden(
+            @PathVariable Long id, @RequestParam String estado) {
+        return ResponseEntity.ok(service.actualizarEstadoOrden(id, estado));
+    }
+
+    //  Consultar reporte de órdenes
+    @GetMapping("/reporte")
+    public List<OrdenCompraModel> obtenerReporteOrdenesCompra() {
+        return service.obtenerReporteOrdenesCompra();
+    }
 }
+
