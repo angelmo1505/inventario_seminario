@@ -8,18 +8,18 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class OrdenCompraModel {
+public class AlertaReabastecimientoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "proveedor_id")
-    private ProveedorModel proveedor;
-
-    private String estado; // Pendiente, Aprobada, En Tránsito, Recibida
+    private String areaSolicitante;
+    private String descripcion;
     private LocalDateTime fechaCreacion;
-    private String estimacionEntrega;
+
+    @ManyToOne
+    @JoinColumn(name = "orden_compra_id")
+    private OrdenCompraModel ordenCompra;
 }
 
 

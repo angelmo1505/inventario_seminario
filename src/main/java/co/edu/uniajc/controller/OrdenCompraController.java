@@ -44,7 +44,6 @@ public class OrdenCompraController {
         service.delete(id);
     }
 
-    
     //  Actualizar estado de una orden
     @PutMapping("/actualizar-estado/{id}")
     public ResponseEntity<OrdenCompraModel> actualizarEstadoOrden(

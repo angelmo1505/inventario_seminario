@@ -37,17 +37,6 @@ public class OrdenCompraService {
         }
         repository.deleteById(id);
     }
-    // Generar automáticamente órdenes cuando el stock es bajo
-    public OrdenCompraModel generarOrdenAutomatica(String producto, int cantidadMinima, int cantidadActual) {
-        if (cantidadActual <= cantidadMinima) {
-            OrdenCompraModel orden = new OrdenCompraModel();
-            orden.setProducto(producto);
-            orden.setCantidadSolicitada(cantidadMinima * 2); // Pedimos el doble del mínimo
-            orden.setEstado("Pendiente");
-            return repository.save(orden);
-        }
-        throw new RuntimeException("No se requiere orden de compra");
-    }
 
     //  Actualizar estado de orden
     public OrdenCompraModel actualizarEstadoOrden(Long id, String nuevoEstado) {
