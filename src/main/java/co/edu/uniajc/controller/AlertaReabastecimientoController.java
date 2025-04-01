@@ -3,9 +3,9 @@ package co.edu.uniajc.controller;
 import co.edu.uniajc.model.AlertaReabastecimientoModel;
 import co.edu.uniajc.service.AlertaReabastecimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/alertas")
@@ -18,8 +18,22 @@ public class AlertaReabastecimientoController {
     }
 
     @GetMapping
-    public List<AlertaReabastecimientoModel> findAll() {
-        return service.findAll();
+    public ResponseEntity<Page<AlertaReabastecimientoModel>> findAll(
+            @RequestParam(required = false) String fecha,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) String usuario,
+            @RequestParam(required = false) String criticidad,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<AlertaReabastecimientoModel> alertas = service.findWithFilters(fecha, categoria, estado, usuario, criticidad, page, size);
+
+        if (alertas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(alertas);
     }
 
     @PostMapping
@@ -27,4 +41,3 @@ public class AlertaReabastecimientoController {
         return service.create(alerta);
     }
 }
-

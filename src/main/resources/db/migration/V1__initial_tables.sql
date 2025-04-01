@@ -61,15 +61,16 @@ CREATE TABLE Reportes (
     fecha_generacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 CREATE TABLE alerta_reabastecimiento (
-    id BIGSERIAL PRIMARY KEY,
-    area_solicitante VARCHAR(255) NOT NULL,
-    descripcion TEXT NOT NULL,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    categoria VARCHAR(100),
-    estado VARCHAR(50),
-    usuario VARCHAR(100),
-    criticidad VARCHAR(50),
-    orden_compra_id BIGINT,
-    FOREIGN KEY (orden_compra_id) REFERENCES orden_compra(id)
+     id BIGSERIAL PRIMARY KEY,
+     area_solicitante VARCHAR(255) NOT NULL,
+     descripcion TEXT NOT NULL,
+     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     categoria VARCHAR(100),
+     estado VARCHAR(50),
+     usuario VARCHAR(100),
+     criticidad VARCHAR(50),
+     orden_compra_id BIGINT,
+     FOREIGN KEY (orden_compra_id) REFERENCES orden_compra(id)
 );
