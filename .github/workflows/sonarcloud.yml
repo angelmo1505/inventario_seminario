@@ -33,11 +33,6 @@ jobs:
           rm -rf ~/.gradle/caches
           rm -rf ~/.gradle/wrapper
 
-      - name: Depurar Configuración
-        run: |
-          cat src/test/resources/application-test.properties
-          ./gradlew properties
-
       - name: Compilar el proyecto con Gradle
         run: ./gradlew build --stacktrace --info
 
