@@ -16,22 +16,30 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v3
+      - name: Configurar Java
+        uses: actions/setup-java@v3
         with:
-          node-version: 18
+          distribution: 'temurin'
+          java-version: '17'    
 
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Configurar Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Dar permisos de ejecución a Gradle Wrapper
+        run: chmod +x gradlew
+
+      - name: Compilar el proyecto con Gradle
+        run: ./gradlew build
 
       - name: Ejecutar análisis en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npx sonar-scanner \
-            -Dsonar.projectKey=inventario_seminario \
+            -Dsonar.projectKey=angelmo1505_inventario_seminario \
             -Dsonar.organization=angelmo1505  \
             -Dsonar.sources=src \
+            -Dsonar.java.binaries=build/classes/java/main \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
