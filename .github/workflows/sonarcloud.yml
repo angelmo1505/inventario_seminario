@@ -34,7 +34,7 @@ jobs:
           rm -rf ~/.gradle/wrapper
 
       - name: Compilar el proyecto con Gradle
-        run: ./gradlew build --stacktrace --info
+        run: ./gradlew build
 
       - name: Generar reporte de cobertura de código
         run: ./gradlew jacocoTestReport
