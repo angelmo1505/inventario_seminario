@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DistribucionModel {
+    // este es el comentario de Julian
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
