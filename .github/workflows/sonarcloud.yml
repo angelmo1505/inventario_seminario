@@ -11,17 +11,7 @@ on:
 jobs:
   sonar:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_DB: seminario_db
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-        ports:
-          - 5432:5432
-
+    
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v3
