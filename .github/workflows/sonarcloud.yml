@@ -22,10 +22,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'    
 
-      - name: Compilar código Java
-        run: |
-          mkdir -p target/classes
-          javac -d target/classes $(find src -name "*.java")
+      - name: Configurar Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Compilar el proyecto con Gradle
+        run: ./gradlew build
 
       - name: Ejecutar análisis en SonarCloud
         env:
@@ -35,6 +36,7 @@ jobs:
             -Dsonar.projectKey=angelmo1505_inventario_seminario \
             -Dsonar.organization=angelmo1505  \
             -Dsonar.sources=src \
+            -Dsonar.java.binaries=build/classes/java/main \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
