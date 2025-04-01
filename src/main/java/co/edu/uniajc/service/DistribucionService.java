@@ -1,7 +1,6 @@
 package co.edu.uniajc.service;
 
 import co.edu.uniajc.model.DistribucionModel;
-
 import co.edu.uniajc.repository.DistribucionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
