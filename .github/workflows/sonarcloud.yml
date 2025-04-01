@@ -16,6 +16,17 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'    
+
+      - name: Compilar código Java
+        run: |
+          mkdir -p target/classes
+          javac -d target/classes $(find src -name "*.java"
+
       - name: Ejecutar análisis en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
