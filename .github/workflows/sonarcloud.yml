@@ -25,7 +25,7 @@ jobs:
       - name: Compilar código Java
         run: |
           mkdir -p target/classes
-          javac -d target/classes $(find src -name "*.java"
+          javac -d target/classes $(find src -name "*.java")
 
       - name: Ejecutar análisis en SonarCloud
         env:
