@@ -22,6 +22,6 @@ public interface AlertaReabastecimientoRepository extends JpaRepository<AlertaRe
             @Param("categoria") String categoria,
             @Param("estado") String estado,
             @Param("usuario") String usuario,
-            @Param("criticidad") String criticidad
-    );
+            @Param("criticidad") String criticidad,
+            Pageable pageable);
 }
