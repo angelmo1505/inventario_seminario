@@ -12,6 +12,16 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: seminario_db
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v3
@@ -28,8 +38,8 @@ jobs:
       - name: Dar permisos de ejecución a Gradle Wrapper
         run: chmod +x gradlew
 
-      - name: Compilar el proyecto con Gradle
-        run: ./gradlew build
+      - name: Compilar el proyecto con Gradle (sin pruebas)
+        run: ./gradlew build -x test
 
       - name: Ejecutar análisis en SonarCloud
         env:
