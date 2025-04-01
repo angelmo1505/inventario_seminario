@@ -38,8 +38,11 @@ jobs:
       - name: Dar permisos de ejecución a Gradle Wrapper
         run: chmod +x gradlew
 
-      - name: Compilar el proyecto con Gradle (sin pruebas)
-        run: ./gradlew build -x test
+      - name: Compilar el proyecto con Gradle
+        run: ./gradlew build
+
+      - name: Generar reporte de cobertura de código
+        run: ./gradlew jacocoTestReport
 
       - name: Ejecutar análisis en SonarCloud
         env:
