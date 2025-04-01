@@ -12,18 +12,44 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: seminario_db
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v3
+
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'    
+
+      - name: Configurar Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Dar permisos de ejecución a Gradle Wrapper
+        run: chmod +x gradlew
+
+      - name: Compilar el proyecto con Gradle (sin pruebas)
+        run: ./gradlew build -x test
 
       - name: Ejecutar análisis en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npx sonar-scanner \
-            -Dsonar.projectKey=inventario_seminario \
+            -Dsonar.projectKey=angelmo1505_inventario_seminario \
             -Dsonar.organization=angelmo1505  \
             -Dsonar.sources=src \
+            -Dsonar.java.binaries=build/classes/java/main \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
