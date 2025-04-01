@@ -29,14 +29,11 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
-	runtimeOnly 'org.postgresql:postgresql'
+	
 	compileOnly 'org.projectlombok:lombok'
 
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.postgresql', module: 'postgresql'
-    }
-	testImplementation 'com.h2database:h2'
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 tasks.named('test') {
@@ -65,11 +62,5 @@ jacoco {
 
 plugins.withType(JacocoPlugin).configureEach {
 	test.finalizedBy 'jacocoTestReport'
-}
-
-sonarqube {
-    properties {
-        property "sonar.gradle.skipCompile", "true"
-    }
 }
 
