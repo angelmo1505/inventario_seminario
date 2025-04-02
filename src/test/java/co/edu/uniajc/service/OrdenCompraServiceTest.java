@@ -27,6 +27,7 @@ class OrdenCompraServiceTest {
     private OrdenCompraService ordenCompraService;
 
     private OrdenCompraModel ordenCompra;
+    private static final String APPROVED = "Aprobada";
 
     @BeforeEach
     void setUp() {
@@ -108,9 +109,9 @@ class OrdenCompraServiceTest {
         when(ordenCompraRepository.findById(1L)).thenReturn(Optional.of(ordenCompra));
         when(ordenCompraRepository.save(any(OrdenCompraModel.class))).thenReturn(ordenCompra);
 
-        OrdenCompraModel result = ordenCompraService.actualizarEstadoOrden(1L, "Aprobada");
+        OrdenCompraModel result = ordenCompraService.actualizarEstadoOrden(1L, APPROVED);
         assertNotNull(result);
-        assertEquals("Aprobada", result.getEstado());
+        assertEquals(APPROVED, result.getEstado());
         verify(ordenCompraRepository, times(1)).findById(1L);
         verify(ordenCompraRepository, times(1)).save(ordenCompra);
     }
@@ -119,7 +120,7 @@ class OrdenCompraServiceTest {
     void testActualizarEstadoOrdenThrowsExceptionWhenNotFound() {
         when(ordenCompraRepository.findById(1L)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> ordenCompraService.actualizarEstadoOrden(1L, "Aprobada"));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ordenCompraService.actualizarEstadoOrden(1L, APPROVED));
         assertEquals("Orden no encontrada", exception.getMessage());
     }
 
