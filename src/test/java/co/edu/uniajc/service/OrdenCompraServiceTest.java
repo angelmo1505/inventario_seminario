@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -32,9 +34,8 @@ class OrdenCompraServiceTest {
     void setUp() {
         orden = new OrdenCompraModel();
         orden.setId(1L);
-        orden.setProveedor("Proveedor A");
-        orden.setFecha("2024-04-01");
-        orden.setTotal(1000.0);
+        orden.setFecha(LocalDate.of(2024, 04, 01));
+        orden.setTotal(new BigDecimal("1000.00"));
         orden.setEstado("Pendiente");
     }
 
