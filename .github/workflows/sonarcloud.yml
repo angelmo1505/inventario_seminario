@@ -53,4 +53,5 @@ jobs:
             -Dsonar.projectKey=angelmo1505_inventario_seminario
             -Dsonar.organization=angelmo1505
             -Dsonar.java.binaries=build/classes/java/main
+            -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml
           projectBaseDir: .

@@ -55,15 +55,21 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+jacoco {
+	toolVersion = "0.8.11"
+}
+
 test {
 	finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-	reports {
-		html.required.set(true)
-		xml.required.set(true)
-	}
+	dependsOn test
+    reports {
+        xml.required.set(true) 
+        html.required.set(true)
+        csv.required.set(false)
+    }
 
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
@@ -76,10 +82,6 @@ jacocoTestReport {
 			])
 		}))
 	}
-}
-
-jacoco {
-	toolVersion = "0.8.11"
 }
 
 plugins.withType(JacocoPlugin).configureEach {
