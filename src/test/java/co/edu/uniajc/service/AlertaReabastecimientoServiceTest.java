@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 class AlertaReabastecimientoServiceTest {
 
     @Mock
-    private AlertaReabastecimientoRepository repository;
+    private AlertaReabastecimientoRepository alertaReabastecimientoRepository;
 
     @InjectMocks
-    private AlertaReabastecimientoService service;
+    private AlertaReabastecimientoService alertaReabastecimientoService;
 
     private AlertaReabastecimientoModel alerta;
 
@@ -36,21 +36,21 @@ class AlertaReabastecimientoServiceTest {
     @Test
     void testFindAll() {
         List<AlertaReabastecimientoModel> alertas = Arrays.asList(alerta);
-        when(repository.findAll()).thenReturn(alertas);
+        when(alertaReabastecimientoRepository.findAll()).thenReturn(alertas);
 
-        List<AlertaReabastecimientoModel> result = service.findAll();
+        List<AlertaReabastecimientoModel> result = alertaReabastecimientoService.findAll();
         assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        verify(alertaReabastecimientoRepository, times(1)).findAll();
     }
 
     @Test
     void testCreate() {
-        when(repository.save(alerta)).thenReturn(alerta);
+        when(alertaReabastecimientoRepository.save(alerta)).thenReturn(alerta);
 
-        AlertaReabastecimientoModel result = service.create(alerta);
+        AlertaReabastecimientoModel result = alertaReabastecimientoService.create(alerta);
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Alerta de reabastecimiento", result.getDescripcion());
-        verify(repository, times(1)).save(alerta);
+        verify(alertaReabastecimientoRepository, times(1)).save(alerta);
     }
 }

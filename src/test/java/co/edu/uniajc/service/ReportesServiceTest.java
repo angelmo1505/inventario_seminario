@@ -21,10 +21,10 @@ import static org.mockito.Mockito.*;
 class ReportesServiceTest {
 
     @Mock
-    private ReportesRepository repository;
+    private ReportesRepository reportesRepository;
 
     @InjectMocks
-    private ReportesService service;
+    private ReportesService reportesService;
 
     private ReportesModel reporte;
 
@@ -37,68 +37,68 @@ class ReportesServiceTest {
     @Test
     void testFindAll() {
         List<ReportesModel> reportes = Arrays.asList(reporte);
-        when(repository.findAll()).thenReturn(reportes);
+        when(reportesRepository.findAll()).thenReturn(reportes);
 
-        List<ReportesModel> result = service.findAll();
+        List<ReportesModel> result = reportesService.findAll();
         assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        verify(reportesRepository, times(1)).findAll();
     }
 
     @Test
     void testFindById() {
-        when(repository.findById(1L)).thenReturn(Optional.of(reporte));
+        when(reportesRepository.findById(1L)).thenReturn(Optional.of(reporte));
 
-        Optional<ReportesModel> result = service.findById(1L);
+        Optional<ReportesModel> result = reportesService.findById(1L);
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
-        verify(repository, times(1)).findById(1L);
+        verify(reportesRepository, times(1)).findById(1L);
     }
 
     @Test
     void testCreate() {
-        when(repository.save(reporte)).thenReturn(reporte);
+        when(reportesRepository.save(reporte)).thenReturn(reporte);
 
-        ReportesModel result = service.create(reporte);
+        ReportesModel result = reportesService.create(reporte);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).save(reporte);
+        verify(reportesRepository, times(1)).save(reporte);
     }
 
     @Test
     void testUpdate() {
-        when(repository.existsById(1L)).thenReturn(true);
-        when(repository.save(reporte)).thenReturn(reporte);
+        when(reportesRepository.existsById(1L)).thenReturn(true);
+        when(reportesRepository.save(reporte)).thenReturn(reporte);
 
-        ReportesModel result = service.update(reporte);
+        ReportesModel result = reportesService.update(reporte);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).save(reporte);
+        verify(reportesRepository, times(1)).existsById(1L);
+        verify(reportesRepository, times(1)).save(reporte);
     }
 
     @Test
     void testUpdateThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(reportesRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.update(reporte));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> reportesService.update(reporte));
         assertEquals("distribucion no encontrada", exception.getMessage());
     }
 
     @Test
     void testDelete() {
-        when(repository.existsById(1L)).thenReturn(true);
-        doNothing().when(repository).deleteById(1L);
+        when(reportesRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(reportesRepository).deleteById(1L);
 
-        service.delete(1L);
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).deleteById(1L);
+        reportesService.delete(1L);
+        verify(reportesRepository, times(1)).existsById(1L);
+        verify(reportesRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void testDeleteThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(reportesRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.delete(1L));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> reportesService.delete(1L));
         assertEquals("Reporte no encontrado", exception.getMessage());
     }
 }

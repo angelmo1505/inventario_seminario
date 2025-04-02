@@ -5,8 +5,13 @@ on:
     branches:
       - develop
   pull_request:
-    branches:
-      - develop
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+
+permissions:
+  pull-requests: read
+
 
 jobs:
   Analysis:

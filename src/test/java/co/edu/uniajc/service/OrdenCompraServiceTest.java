@@ -21,10 +21,10 @@ import static org.mockito.Mockito.*;
 class OrdenCompraServiceTest {
 
     @Mock
-    private OrdenCompraRepository repository;
+    private OrdenCompraRepository ordenCompraRepository;
 
     @InjectMocks
-    private OrdenCompraService service;
+    private OrdenCompraService ordenCompraService;
 
     private OrdenCompraModel ordenCompra;
 
@@ -38,98 +38,98 @@ class OrdenCompraServiceTest {
     @Test
     void testFindAll() {
         List<OrdenCompraModel> ordenes = Arrays.asList(ordenCompra);
-        when(repository.findAll()).thenReturn(ordenes);
+        when(ordenCompraRepository.findAll()).thenReturn(ordenes);
 
-        List<OrdenCompraModel> result = service.findAll();
+        List<OrdenCompraModel> result = ordenCompraService.findAll();
         assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        verify(ordenCompraRepository, times(1)).findAll();
     }
 
     @Test
     void testFindById() {
-        when(repository.findById(1L)).thenReturn(Optional.of(ordenCompra));
+        when(ordenCompraRepository.findById(1L)).thenReturn(Optional.of(ordenCompra));
 
-        Optional<OrdenCompraModel> result = service.findById(1L);
+        Optional<OrdenCompraModel> result = ordenCompraService.findById(1L);
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
-        verify(repository, times(1)).findById(1L);
+        verify(ordenCompraRepository, times(1)).findById(1L);
     }
 
     @Test
     void testCreate() {
-        when(repository.save(ordenCompra)).thenReturn(ordenCompra);
+        when(ordenCompraRepository.save(ordenCompra)).thenReturn(ordenCompra);
 
-        OrdenCompraModel result = service.create(ordenCompra);
+        OrdenCompraModel result = ordenCompraService.create(ordenCompra);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).save(ordenCompra);
+        verify(ordenCompraRepository, times(1)).save(ordenCompra);
     }
 
     @Test
     void testUpdate() {
-        when(repository.existsById(1L)).thenReturn(true);
-        when(repository.save(ordenCompra)).thenReturn(ordenCompra);
+        when(ordenCompraRepository.existsById(1L)).thenReturn(true);
+        when(ordenCompraRepository.save(ordenCompra)).thenReturn(ordenCompra);
 
-        OrdenCompraModel result = service.update(ordenCompra);
+        OrdenCompraModel result = ordenCompraService.update(ordenCompra);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).save(ordenCompra);
+        verify(ordenCompraRepository, times(1)).existsById(1L);
+        verify(ordenCompraRepository, times(1)).save(ordenCompra);
     }
 
     @Test
     void testUpdateThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(ordenCompraRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.update(ordenCompra));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ordenCompraService.update(ordenCompra));
         assertEquals("Orden de compra no encontrada", exception.getMessage());
     }
 
     @Test
     void testDelete() {
-        when(repository.existsById(1L)).thenReturn(true);
-        doNothing().when(repository).deleteById(1L);
+        when(ordenCompraRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(ordenCompraRepository).deleteById(1L);
 
-        service.delete(1L);
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).deleteById(1L);
+        ordenCompraService.delete(1L);
+        verify(ordenCompraRepository, times(1)).existsById(1L);
+        verify(ordenCompraRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void testDeleteThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(ordenCompraRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.delete(1L));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ordenCompraService.delete(1L));
         assertEquals("Orden de compra no encontrada", exception.getMessage());
     }
 
     @Test
     void testActualizarEstadoOrden() {
-        when(repository.findById(1L)).thenReturn(Optional.of(ordenCompra));
-        when(repository.save(any(OrdenCompraModel.class))).thenReturn(ordenCompra);
+        when(ordenCompraRepository.findById(1L)).thenReturn(Optional.of(ordenCompra));
+        when(ordenCompraRepository.save(any(OrdenCompraModel.class))).thenReturn(ordenCompra);
 
-        OrdenCompraModel result = service.actualizarEstadoOrden(1L, "Aprobada");
+        OrdenCompraModel result = ordenCompraService.actualizarEstadoOrden(1L, "Aprobada");
         assertNotNull(result);
         assertEquals("Aprobada", result.getEstado());
-        verify(repository, times(1)).findById(1L);
-        verify(repository, times(1)).save(ordenCompra);
+        verify(ordenCompraRepository, times(1)).findById(1L);
+        verify(ordenCompraRepository, times(1)).save(ordenCompra);
     }
 
     @Test
     void testActualizarEstadoOrdenThrowsExceptionWhenNotFound() {
-        when(repository.findById(1L)).thenReturn(Optional.empty());
+        when(ordenCompraRepository.findById(1L)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.actualizarEstadoOrden(1L, "Aprobada"));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> ordenCompraService.actualizarEstadoOrden(1L, "Aprobada"));
         assertEquals("Orden no encontrada", exception.getMessage());
     }
 
     @Test
     void testObtenerReporteOrdenesCompra() {
         List<OrdenCompraModel> ordenes = Arrays.asList(ordenCompra);
-        when(repository.findAll()).thenReturn(ordenes);
+        when(ordenCompraRepository.findAll()).thenReturn(ordenes);
 
-        List<OrdenCompraModel> result = service.obtenerReporteOrdenesCompra();
+        List<OrdenCompraModel> result = ordenCompraService.obtenerReporteOrdenesCompra();
         assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        verify(ordenCompraRepository, times(1)).findAll();
     }
 }

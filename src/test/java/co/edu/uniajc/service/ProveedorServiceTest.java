@@ -21,10 +21,10 @@ import static org.mockito.Mockito.*;
 class ProveedorServiceTest {
 
     @Mock
-    private ProveedorRepository repository;
+    private ProveedorRepository proveedorRepository;
 
     @InjectMocks
-    private ProveedorService service;
+    private ProveedorService proveedorService;
 
     private ProveedorModel proveedor;
 
@@ -37,68 +37,68 @@ class ProveedorServiceTest {
     @Test
     void testFindAll() {
         List<ProveedorModel> proveedores = Arrays.asList(proveedor);
-        when(repository.findAll()).thenReturn(proveedores);
+        when(proveedorRepository.findAll()).thenReturn(proveedores);
 
-        List<ProveedorModel> result = service.findAll();
+        List<ProveedorModel> result = proveedorService.findAll();
         assertEquals(1, result.size());
-        verify(repository, times(1)).findAll();
+        verify(proveedorRepository, times(1)).findAll();
     }
 
     @Test
     void testFindById() {
-        when(repository.findById(1L)).thenReturn(Optional.of(proveedor));
+        when(proveedorRepository.findById(1L)).thenReturn(Optional.of(proveedor));
 
-        Optional<ProveedorModel> result = service.findById(1L);
+        Optional<ProveedorModel> result = proveedorService.findById(1L);
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
-        verify(repository, times(1)).findById(1L);
+        verify(proveedorRepository, times(1)).findById(1L);
     }
 
     @Test
     void testCreate() {
-        when(repository.save(proveedor)).thenReturn(proveedor);
+        when(proveedorRepository.save(proveedor)).thenReturn(proveedor);
 
-        ProveedorModel result = service.create(proveedor);
+        ProveedorModel result = proveedorService.create(proveedor);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).save(proveedor);
+        verify(proveedorRepository, times(1)).save(proveedor);
     }
 
     @Test
     void testUpdate() {
-        when(repository.existsById(1L)).thenReturn(true);
-        when(repository.save(proveedor)).thenReturn(proveedor);
+        when(proveedorRepository.existsById(1L)).thenReturn(true);
+        when(proveedorRepository.save(proveedor)).thenReturn(proveedor);
 
-        ProveedorModel result = service.update(proveedor);
+        ProveedorModel result = proveedorService.update(proveedor);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).save(proveedor);
+        verify(proveedorRepository, times(1)).existsById(1L);
+        verify(proveedorRepository, times(1)).save(proveedor);
     }
 
     @Test
     void testUpdateThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(proveedorRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.update(proveedor));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> proveedorService.update(proveedor));
         assertEquals("Proveedor no encontrado", exception.getMessage());
     }
 
     @Test
     void testDelete() {
-        when(repository.existsById(1L)).thenReturn(true);
-        doNothing().when(repository).deleteById(1L);
+        when(proveedorRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(proveedorRepository).deleteById(1L);
 
-        service.delete(1L);
-        verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).deleteById(1L);
+        proveedorService.delete(1L);
+        verify(proveedorRepository, times(1)).existsById(1L);
+        verify(proveedorRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void testDeleteThrowsExceptionWhenNotFound() {
-        when(repository.existsById(1L)).thenReturn(false);
+        when(proveedorRepository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.delete(1L));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> proveedorService.delete(1L));
         assertEquals("Proveedor no encontrado", exception.getMessage());
     }
 }

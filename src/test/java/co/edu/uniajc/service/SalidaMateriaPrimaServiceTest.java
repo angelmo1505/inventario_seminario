@@ -24,31 +24,31 @@ class SalidaMateriaPrimaServiceTest {
     private SalidaMateriaPrimaRepository repository;
 
     @InjectMocks
-    private SalidaMateriaPrimaService service;
+    private SalidaMateriaPrimaService salidaMateriaPrimaService;
 
-    private SalidaMateriaPrimaModel salida;
+    private SalidaMateriaPrimaModel salidaMateriaPrimaModel;
 
     @BeforeEach
     void setUp() {
-        salida = new SalidaMateriaPrimaModel();
-        salida.setId(1L);
+        salidaMateriaPrimaModel = new SalidaMateriaPrimaModel();
+        salidaMateriaPrimaModel.setId(1L);
     }
 
     @Test
     void testFindAll() {
-        List<SalidaMateriaPrimaModel> salidas = Arrays.asList(salida);
+        List<SalidaMateriaPrimaModel> salidas = Arrays.asList(salidaMateriaPrimaModel);
         when(repository.findAll()).thenReturn(salidas);
 
-        List<SalidaMateriaPrimaModel> result = service.findAll();
+        List<SalidaMateriaPrimaModel> result = salidaMateriaPrimaService.findAll();
         assertEquals(1, result.size());
         verify(repository, times(1)).findAll();
     }
 
     @Test
     void testFindById() {
-        when(repository.findById(1L)).thenReturn(Optional.of(salida));
+        when(repository.findById(1L)).thenReturn(Optional.of(salidaMateriaPrimaModel));
 
-        Optional<SalidaMateriaPrimaModel> result = service.findById(1L);
+        Optional<SalidaMateriaPrimaModel> result = salidaMateriaPrimaService.findById(1L);
         assertTrue(result.isPresent());
         assertEquals(1L, result.get().getId());
         verify(repository, times(1)).findById(1L);
@@ -56,31 +56,31 @@ class SalidaMateriaPrimaServiceTest {
 
     @Test
     void testCreate() {
-        when(repository.save(salida)).thenReturn(salida);
+        when(repository.save(salidaMateriaPrimaModel)).thenReturn(salidaMateriaPrimaModel);
 
-        SalidaMateriaPrimaModel result = service.create(salida);
+        SalidaMateriaPrimaModel result = salidaMateriaPrimaService.create(salidaMateriaPrimaModel);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        verify(repository, times(1)).save(salida);
+        verify(repository, times(1)).save(salidaMateriaPrimaModel);
     }
 
     @Test
     void testUpdate() {
         when(repository.existsById(1L)).thenReturn(true);
-        when(repository.save(salida)).thenReturn(salida);
+        when(repository.save(salidaMateriaPrimaModel)).thenReturn(salidaMateriaPrimaModel);
 
-        SalidaMateriaPrimaModel result = service.update(salida);
+        SalidaMateriaPrimaModel result = salidaMateriaPrimaService.update(salidaMateriaPrimaModel);
         assertNotNull(result);
         assertEquals(1L, result.getId());
         verify(repository, times(1)).existsById(1L);
-        verify(repository, times(1)).save(salida);
+        verify(repository, times(1)).save(salidaMateriaPrimaModel);
     }
 
     @Test
     void testUpdateThrowsExceptionWhenNotFound() {
         when(repository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.update(salida));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> salidaMateriaPrimaService.update(salidaMateriaPrimaModel));
         assertEquals("Salida no encontrada", exception.getMessage());
     }
 
@@ -89,7 +89,7 @@ class SalidaMateriaPrimaServiceTest {
         when(repository.existsById(1L)).thenReturn(true);
         doNothing().when(repository).deleteById(1L);
 
-        service.delete(1L);
+        salidaMateriaPrimaService.delete(1L);
         verify(repository, times(1)).existsById(1L);
         verify(repository, times(1)).deleteById(1L);
     }
@@ -98,7 +98,7 @@ class SalidaMateriaPrimaServiceTest {
     void testDeleteThrowsExceptionWhenNotFound() {
         when(repository.existsById(1L)).thenReturn(false);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> service.delete(1L));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> salidaMateriaPrimaService.delete(1L));
         assertEquals("Salida no encontrada", exception.getMessage());
     }
 }
