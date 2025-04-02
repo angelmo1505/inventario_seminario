@@ -48,6 +48,20 @@ class OrdenCompraServiceTest {
     }
 
     @Test
+    void testCreate_Failure_NullFecha() {
+        orden.setFecha(null);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> service.create(orden));
+        assertEquals("Proveedor, fecha y total son obligatorios.", exception.getMessage());
+    }
+
+    @Test
+    void testCreate_Failure_NullTotal() {
+        orden.setTotal(null);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> service.create(orden));
+        assertEquals("Proveedor, fecha y total son obligatorios.", exception.getMessage());
+    }
+
+    @Test
     void testFindAll() {
         when(repository.findAll()).thenReturn(Arrays.asList(orden));
         List<OrdenCompraModel> result = service.findAll();
