@@ -16,7 +16,7 @@ public class AlertaReabastecimientoController {
     public AlertaReabastecimientoController(AlertaReabastecimientoService service) {
         this.service = service;
     }
-    //miguel
+   
     @GetMapping
     public List<AlertaReabastecimientoModel> findAll() {
         return service.findAll();
