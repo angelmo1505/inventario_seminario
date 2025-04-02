@@ -1,6 +1,7 @@
 package co.edu.uniajc.service;
 
 import co.edu.uniajc.model.OrdenCompraModel;
+import co.edu.uniajc.model.ProveedorModel;
 import co.edu.uniajc.repository.OrdenCompraRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,15 @@ class OrdenCompraServiceTest {
 
     @BeforeEach
     void setUp() {
+        ProveedorModel proveedor = new ProveedorModel();
+        proveedor.setId(1L);
+        proveedor.setNombre("Proveedor A");
+        proveedor.setContacto("contacto@proveedora.com");
+        proveedor.setTelefono("123456789");
+        proveedor.setDireccion("Calle 123");
         orden = new OrdenCompraModel();
         orden.setId(1L);
+        orden.setProveedor(proveedor);
         orden.setFecha(LocalDate.of(2024, 04, 01));
         orden.setTotal(new BigDecimal("1000.00"));
         orden.setEstado("Pendiente");
