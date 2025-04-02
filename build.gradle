@@ -36,8 +36,22 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.40 // 80% coverage
+			}
+		}
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+test {
+	finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
@@ -49,8 +63,11 @@ jacocoTestReport {
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: [
-					"co/edu/uniajc/model/*",
-					"co/edu/uniajc/model/dto/*"
+					'co/edu/uniajc/inventario_seminarioApplication.*',
+					'co/edu/uniajc/model/**',
+					'co/edu/uniajc/repository/**',
+					'co/edu/uniajc/exception/**',
+					'co/edu/uniajc/controller/**',
 			])
 		}))
 	}
@@ -64,3 +81,15 @@ plugins.withType(JacocoPlugin).configureEach {
 	test.finalizedBy 'jacocoTestReport'
 }
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "angelmo1505_inventario_seminario"
+        property "sonar.organization", "angelmo1505"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.sources", "src/main"
+		property "sonar.tests", "src/test"
+		property "sonar.exclusions", "**/resources/**"
+		property "sonar.coverage.exclusions", "**/model/**, **/controller/**, **/exception/**, **/repository/**, **/test/**, **/Seminario1041BApplication.*"
+		property "sonar.java.binaries", "build/classes/java/main"
+    }
+}
