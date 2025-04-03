@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 public class DistribucionService {
     private final DistribucionRepository repository;
-    //Este es el comentario de Oscar Aguilar
 
     @Autowired
     public DistribucionService(DistribucionRepository repository) {
