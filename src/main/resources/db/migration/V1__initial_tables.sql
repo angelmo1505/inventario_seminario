@@ -9,7 +9,7 @@ CREATE TABLE Proveedor (
 
 CREATE TABLE MateriaPrima (
     id BIGSERIAL PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
     descripcion TEXT,
     unidad_medida VARCHAR(50),
     stock_actual INT DEFAULT 0,
