@@ -1,15 +1,19 @@
+package co.edu.uniajc.service;
 import co.edu.uniajc.model.AlertaReabastecimientoModel;
 import co.edu.uniajc.repository.AlertaReabastecimientoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.*;
 import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AlertaReabastecimientoServiceTest {
 
     @Mock
