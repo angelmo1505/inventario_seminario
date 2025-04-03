@@ -23,6 +23,9 @@ public class OrdenCompraService {
         return repository.findById(id);
     }
     public OrdenCompraModel create(OrdenCompraModel ordenCompra) {
+        if (ordenCompra.getProveedor() == null || ordenCompra.getFecha() == null || ordenCompra.getTotal() == null) {
+            throw new IllegalArgumentException("Proveedor, fecha y total son obligatorios.");
+        }
         return repository.save(ordenCompra);
     }
     public OrdenCompraModel update(OrdenCompraModel ordenCompra) {

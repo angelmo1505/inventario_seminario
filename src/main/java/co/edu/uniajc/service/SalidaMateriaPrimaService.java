@@ -1,6 +1,5 @@
 package co.edu.uniajc.service;
 
-import co.edu.uniajc.model.EntradaMateriaPrimaModel;
 import co.edu.uniajc.model.SalidaMateriaPrimaModel;
 import co.edu.uniajc.repository.SalidaMateriaPrimaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

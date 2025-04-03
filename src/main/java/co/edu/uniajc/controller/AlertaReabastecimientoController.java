@@ -16,7 +16,7 @@ public class AlertaReabastecimientoController {
     public AlertaReabastecimientoController(AlertaReabastecimientoService service) {
         this.service = service;
     }
-
+   
     @GetMapping
     public ResponseEntity<Page<AlertaReabastecimientoModel>> findAll(
             @RequestParam(required = false) String fecha,
