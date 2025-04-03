@@ -1,6 +1,5 @@
 package co.edu.uniajc.service;
 
-import co.edu.uniajc.model.EntradaMateriaPrimaModel;
 import co.edu.uniajc.model.SalidaMateriaPrimaModel;
 import co.edu.uniajc.repository.SalidaMateriaPrimaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ public class SalidaMateriaPrimaService {
         if (!repository.existsById(salida.getId())) {
             throw new RuntimeException("Salida no encontrada");
         }
+        //
         return repository.save(salida);
     }
     public void delete(Long id) {

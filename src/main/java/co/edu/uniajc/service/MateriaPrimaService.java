@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class MateriaPrimaService {
     private final MateriaPrimaRepository repository;
-
+// Este crea la funcion
     @Autowired
     public MateriaPrimaService(MateriaPrimaRepository repository) {
         this.repository = repository;

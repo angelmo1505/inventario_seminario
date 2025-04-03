@@ -15,11 +15,14 @@ public class AlertaReabastecimientoModel {
 
     private String areaSolicitante;
     private String descripcion;
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fecha;
+
+    private String categoria;
+    private String estado;
+    private String usuario;
+    private String criticidad;
 
     @ManyToOne
     @JoinColumn(name = "orden_compra_id")
     private OrdenCompraModel ordenCompra;
 }
-
-
