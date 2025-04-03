@@ -49,7 +49,7 @@ public class OrdenCompraService {
         return repository.save(orden);
     }
 
-    //  Obtener reporte de órdenes de compra
+    //  Obtener reporte de las órdenes de compra
     public List<OrdenCompraModel> obtenerReporteOrdenesCompra() {
         return repository.findAll();
     }
