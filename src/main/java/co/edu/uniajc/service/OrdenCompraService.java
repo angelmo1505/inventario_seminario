@@ -49,7 +49,6 @@ public class OrdenCompraService {
         return repository.save(orden);
     }
 
-
     public List<OrdenCompraModel> obtenerReporteOrdenesCompra() {
         return repository.findAll();
     }
