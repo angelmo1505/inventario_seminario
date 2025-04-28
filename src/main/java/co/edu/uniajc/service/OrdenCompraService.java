@@ -23,6 +23,9 @@ public class OrdenCompraService {
         return repository.findById(id);
     }
     public OrdenCompraModel create(OrdenCompraModel ordenCompra) {
+        if (ordenCompra.getProveedor() == null || ordenCompra.getFecha() == null || ordenCompra.getTotal() == null) {
+            throw new IllegalArgumentException("Proveedor, fecha y total son obligatorios.");
+        }
         return repository.save(ordenCompra);
     }
     public OrdenCompraModel update(OrdenCompraModel ordenCompra) {
@@ -38,7 +41,7 @@ public class OrdenCompraService {
         repository.deleteById(id);
     }
 
-    //  Actualizar estado de orden
+
     public OrdenCompraModel actualizarEstadoOrden(Long id, String nuevoEstado) {
         OrdenCompraModel orden = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
@@ -46,7 +49,6 @@ public class OrdenCompraService {
         return repository.save(orden);
     }
 
-    //  Obtener reporte de órdenes de compra
     public List<OrdenCompraModel> obtenerReporteOrdenesCompra() {
         return repository.findAll();
     }
