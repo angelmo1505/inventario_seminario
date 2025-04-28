@@ -1,6 +1,8 @@
 package co.edu.uniajc.service;
 
+import co.edu.uniajc.model.MateriaPrimaModel;
 import co.edu.uniajc.model.SalidaMateriaPrimaModel;
+import co.edu.uniajc.repository.MateriaPrimaRepository;
 import co.edu.uniajc.repository.SalidaMateriaPrimaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,16 +25,24 @@ class SalidaMateriaPrimaServiceTest {
 
     @Mock
     private SalidaMateriaPrimaRepository repository;
+    @Mock
+    private MateriaPrimaRepository materiaPrimaRepository;
 
     @InjectMocks
     private SalidaMateriaPrimaService salidaMateriaPrimaService;
 
     private SalidaMateriaPrimaModel salidaMateriaPrimaModel;
+    private MateriaPrimaModel materiaPrimaModel;
 
     @BeforeEach
     void setUp() {
         salidaMateriaPrimaModel = new SalidaMateriaPrimaModel();
         salidaMateriaPrimaModel.setId(1L);
+
+        materiaPrimaModel = new MateriaPrimaModel();
+        materiaPrimaModel.setId(100L); // Asigna un ID a la materia prima
+
+        salidaMateriaPrimaModel.setMateriaPrima(materiaPrimaModel); // Asigna la materia prima a la salida
     }
 
     @Test
@@ -56,14 +67,20 @@ class SalidaMateriaPrimaServiceTest {
 
     @Test
     void testCreate() {
-        when(repository.save(salidaMateriaPrimaModel)).thenReturn(salidaMateriaPrimaModel);
+        // Configura el comportamiento del mock del materiaPrimaRepository
+        when(materiaPrimaRepository.findById(100L)).thenReturn(Optional.of(materiaPrimaModel));
+
+        // Configura el comportamiento del mock del repository de salida
+        when(repository.save(any(SalidaMateriaPrimaModel.class))).thenReturn(salidaMateriaPrimaModel);
 
         SalidaMateriaPrimaModel result = salidaMateriaPrimaService.create(salidaMateriaPrimaModel);
         assertNotNull(result);
         assertEquals(1L, result.getId());
+        assertNotNull(result.getMateriaPrima());
+        assertEquals(100L, result.getMateriaPrima().getId());
         verify(repository, times(1)).save(salidaMateriaPrimaModel);
+        verify(materiaPrimaRepository, times(1)).findById(100L);
     }
-
     @Test
     void testUpdate() {
         when(repository.existsById(1L)).thenReturn(true);

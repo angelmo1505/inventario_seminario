@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
+@Table(name = "entradamateriaprima")
 public class EntradaMateriaPrimaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +18,5 @@ public class EntradaMateriaPrimaModel {
     private MateriaPrimaModel materiaPrima;
 
     private int cantidad;
-    private String fechaIngreso;
+    private String fecha;
 }

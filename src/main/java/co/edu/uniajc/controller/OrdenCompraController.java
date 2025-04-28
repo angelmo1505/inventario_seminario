@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ordencompra")
+@RequestMapping("/ordencompra")
 public class OrdenCompraController {
     private final OrdenCompraService service;
 
@@ -49,7 +49,6 @@ public class OrdenCompraController {
         service.delete(id);
     }
 
-    //  Actualizar estado de una orden
     @PutMapping("/actualizar-estado/{id}")
     public ResponseEntity<OrdenCompraModel> actualizarEstadoOrden(
             @PathVariable Long id, @RequestParam String estado) {
