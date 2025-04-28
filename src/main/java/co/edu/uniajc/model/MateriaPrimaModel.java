@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(name = "materiaprima")
 public class MateriaPrimaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +19,4 @@ public class MateriaPrimaModel {
     private String descripcion;
     private int stockActual;
 
-    @OneToMany(mappedBy = "materiaPrima")
-    private List<EntradaMateriaPrimaModel> entradas;
-
-    @OneToMany(mappedBy = "materiaPrima")
-    private List<SalidaMateriaPrimaModel> salidas;
 }

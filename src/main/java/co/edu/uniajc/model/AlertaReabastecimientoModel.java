@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Table(name = "alerta_reabastecimiento")
 public class AlertaReabastecimientoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

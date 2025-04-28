@@ -3,7 +3,6 @@ package co.edu.uniajc.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDateTime;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,6 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
+@Table(name = "ordencompra")
 public class OrdenCompraModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
