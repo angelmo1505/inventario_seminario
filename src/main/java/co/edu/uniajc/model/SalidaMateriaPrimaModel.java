@@ -1,5 +1,7 @@
 package co.edu.uniajc.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +21,5 @@ public class SalidaMateriaPrimaModel {
     private MateriaPrimaModel materiaPrima;
 
     private int cantidad;
-    private String fecha;
+    private LocalDate fecha;
 }

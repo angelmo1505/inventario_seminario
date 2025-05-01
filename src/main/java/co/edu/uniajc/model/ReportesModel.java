@@ -1,5 +1,7 @@
 package co.edu.uniajc.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,4 +19,6 @@ public class ReportesModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
+    private String descripcion;
+    private LocalDate fecha_generacion; 
 }

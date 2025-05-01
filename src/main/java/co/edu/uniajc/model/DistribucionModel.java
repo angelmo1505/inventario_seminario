@@ -1,5 +1,8 @@
 package co.edu.uniajc.model;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +16,16 @@ import lombok.Setter;
 @Setter
 @Table(name = "distribucion")
 public class DistribucionModel {
-    // este es el comentario de Julian
-    @Id
+ @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "salida_materia_prima_id") 
+    private Long salidaMateriaPrimaId;
+
     private String destino;
+
+    private LocalDate fecha; 
+
+    private Integer cantidad;
 }
