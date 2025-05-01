@@ -41,7 +41,7 @@ public class OrdenCompraService {
         repository.deleteById(id);
     }
 
-    //  Actualizar estado de orden
+
     public OrdenCompraModel actualizarEstadoOrden(Long id, String nuevoEstado) {
         OrdenCompraModel orden = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Orden no encontrada"));
@@ -49,7 +49,6 @@ public class OrdenCompraService {
         return repository.save(orden);
     }
 
-    //  Obtener reporte de órdenes de compra
     public List<OrdenCompraModel> obtenerReporteOrdenesCompra() {
         return repository.findAll();
     }
